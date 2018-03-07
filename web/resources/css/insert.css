@@ -1,0 +1,15 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    font-size: 14px;
+    font-variant: small-caps;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    font-size: 30px;
+    font-variant: small-caps;
+}

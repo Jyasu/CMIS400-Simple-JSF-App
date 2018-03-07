@@ -1,0 +1,66 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:f = "http://java.sun.com/jsf/core"    
+   xmlns:h = "http://java.sun.com/jsf/html">
+    <h:outputStylesheet library = "css" name = "styles.css"  /> 
+    <h:head>
+      <title>Game Reviews</title>
+   </h:head>
+
+   <h:body>
+       <h2>Game Reviews</h2>
+      <h:form>
+      <h:dataTable value = "#{connectdb.reviews}" var = "a"
+        styleClass = "greyGridTable"
+        >
+         
+         <h:column><f:facet name = "header">ID</f:facet>
+            #{a.id}
+         </h:column>
+         
+         <h:column><f:facet name = "header">Game Title</f:facet>
+            #{a.gameName}
+         </h:column>
+          
+          <h:column><f:facet name = "header">Console</f:facet>
+            #{a.console}
+         </h:column>
+          
+         <h:column><f:facet name = "header">Release Year</f:facet>
+            #{a.year}
+         </h:column>
+          
+        <h:column><f:facet name = "header">Reviewer</f:facet>
+            #{a.reviewer}
+         </h:column>
+          
+         <h:column><f:facet name = "header">Review Score</f:facet>
+            #{a.reviewScore}
+         </h:column>           
+      </h:dataTable>  
+        <tr>
+        <td><h:outputText value="Search For"/></td>
+        <td><h:inputText value="#{search.user_in}"/></td>
+        </tr>
+        <tr>
+        <td><h:outputText value="Search By" /></td>
+        <td><h:selectOneMenu value="#{search.selection}">
+                <f:selectItem itemValue ="review_id" itemLabel="Review Id"/>
+                <f:selectItem itemValue ="game_name" itemLabel="Game Title"/>
+                <f:selectItem itemValue ="console" itemLabel="Console Name"/>
+                <f:selectItem itemValue ="year_released" itemLabel="Release Year"/>
+                <f:selectItem itemValue ="reviewer" itemLabel="Reviewer Name"/>
+                <f:selectItem itemValue ="review_score" itemLabel="Review Score"/>
+            </h:selectOneMenu>
+        </td>
+        </tr>
+        <td><h:commandButton value="Search" action="reply/search"/></td>
+        <br></br>
+        <h:link value="Add Review" outcome ="reply/insert"/>
+    </h:form>
+
+   </h:body>
+</html> 
