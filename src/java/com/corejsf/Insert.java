@@ -1,8 +1,8 @@
 package com.corejsf;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -11,40 +11,58 @@ import javax.faces.bean.RequestScoped;
  *
  * @author Justin Wheeler.
  */
-@ManagedBean(name="user")
+@ManagedBean(name = "user")
 @RequestScoped
 public class Insert {
-    Connection conn;
-    private int id;
+
+    private ConnectDB connection;
     private int reviewScore;
-    private String gameName; 
-    private String console; 
-    private String year; 
-    private String reviewer;    
-    
-    public void insertReview() throws SQLException{
-    String connectionURL = "";  
-    conn = DriverManager.getConnection(connectionURL); 
-    
-    String insertNewReview = "INSERT INTO REVIEWS VALUES (?, ?, ?, ?, ?, ?)";
-    PreparedStatement pstmt = conn.prepareStatement(insertNewReview);
-    pstmt.setInt(1, id);
-    pstmt.setString(2, gameName);
-    pstmt.setString(3, console);
-    pstmt.setString(4, year);
-    pstmt.setString(5, reviewer);
-    pstmt.setInt(6, reviewScore);
-    pstmt.executeUpdate();
-  }
+    private String gameName;
+    private String console;
+    private String year;
+    private String reviewer;
 
-    public Connection getConn() {
-        return conn;
+    //Make constant to prevent tampering
+    private static final String TABLENAME = "REVIEWS";
+    private static final String COUNT_ROWS = String.format("SELECT COUNT(review_id) FROM %s", TABLENAME);
+
+    //Counts the number of rows in the reviews table and returns the next review_id
+    private int countRows() throws SQLException {
+        int newCount = 0;
+
+        PreparedStatement statement = connection.conn.prepareStatement(COUNT_ROWS);
+        statement.execute();
+
+        ResultSet result = statement.getResultSet();
+        while (result.next()) {
+            newCount = result.getInt(1);
+        }
+        //Returns the number of rows +1 to set value to the next highest review_id
+        return newCount + 1;
+    }
+    
+    //Inserts form values into reviews table
+    public void insertReview() throws SQLException, FileNotFoundException {
+        connection = new ConnectDB();
+        int review_id = countRows();
+
+        String insertNewReview = String.format("INSERT INTO %s VALUES (?, ?, ?, ?, ?, ?)", TABLENAME);
+        PreparedStatement pStatement = connection.conn.prepareStatement(insertNewReview);
+        
+        //review_id is set automatically to the very next review_id in the table
+        pStatement.setInt(1, review_id);
+        //Sets the values corresponding to user input
+        pStatement.setString(2, gameName);
+        pStatement.setString(3, console);
+        pStatement.setString(4, year);
+        pStatement.setString(5, reviewer);
+        pStatement.setInt(6, reviewScore);
+        pStatement.executeUpdate();
     }
 
-    public int getId() {
-        return id;
-    }
-
+    /*
+    * Getters and Setters
+    */
     public int getReviewScore() {
         return reviewScore;
     }
@@ -63,14 +81,6 @@ public class Insert {
 
     public String getReviewer() {
         return reviewer;
-    }
-
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setReviewScore(int reviewScore) {

@@ -1,22 +1,24 @@
 package com.corejsf;
 
 /**
- *
  * @author J. Wheeler
  */
-
 public class Reviews {
+
     private int id;
     private int reviewScore;
-    private String gameName; 
-    private String console; 
-    private String year; 
+    private String gameName;
+    private String console;
+    private String year;
     private String reviewer;
-    
+
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    /*
+    * Getters and Setters
+    */
     public void setReviewScore(int reviewScore) {
         this.reviewScore = reviewScore;
     }

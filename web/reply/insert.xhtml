@@ -1,57 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:outputStylesheet library = "css" name = "insert.css"  /> 
     <h:head>
-    <title>Insert Data</title>
+        <title>Insert Data</title>
     </h:head>
     <h:body>
         <h2>Insert New Review</h2>
-    <h:form>
-        <table>
-            <tr>
-            <td><h:messages showDetail="true" /> </td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Review Id"/></td>
-            <td><h:inputText value="#{user.id}" maxlength="3" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Game Title" /></td>
-            <td><h:inputText value="#{user.gameName}" maxlength="100" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Console Name"/></td>
-            <td><h:inputText value="#{user.console}" maxlength="10" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Reviewer Name"/></td>
-            <td><h:inputText value="#{user.reviewer}" maxlength="100" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Review Score"/></td>
-            <td><h:inputText value="#{user.reviewScore}" maxlength="1" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td><h:outputText value="Release Year"/></td>
-            <td><h:inputText value="#{user.year}" maxlength="4" required="true" requiredMessage="Error: All inputs are required."/></td>
-            </tr>
-            <tr>
-            <td></td>
-            <td><h:commandButton value="Insert" action="#{user.insertReview}" /></td>
-            </tr>
-            <tr>
-            <td></td>
-            <td><h:commandButton id="reset" value="Reset" type="reset"/></td>
-            </tr>
-            
-        </table>
-        <br></br>
-        <h:link value="Return to Review List" outcome ="/index"/>
+        <h:form>
+            <table>
+                <tr>
+                    <td><h:messages showDetail="true" /> </td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Game Title" /></td>
+                    <td><h:inputText value="#{user.gameName}" maxlength="100" required="true" requiredMessage="Error: All inputs are required."/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Console Name"/></td>
+                    <td><h:inputText value="#{user.console}" maxlength="10" required="true" requiredMessage="Error: All inputs are required."/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Reviewer Name"/></td>
+                    <td><h:inputText value="#{user.reviewer}" maxlength="100" required="true" requiredMessage="Error: All inputs are required."/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Review Score"/></td>
+                    <td><h:inputText value="#{user.reviewScore}" maxlength="1" required="true" requiredMessage="Error: All inputs are required."/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Release Year"/></td>
+                    <td><h:inputText value="#{user.year}" maxlength="4" required="true" requiredMessage="Error: All inputs are required."/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><h:commandButton value="Insert" action="#{user.insertReview}" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><h:commandButton id="reset" value="Reset" type="reset"/></td>
+                </tr>
+
+            </table>
+            <br></br>
+            <h:link value="Return to Review List" outcome ="/index"/>
         </h:form>
         <br></br>
         <img src="../resources/controllers.jpg" width="280" height="140" alt="controllers" />
